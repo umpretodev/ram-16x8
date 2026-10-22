@@ -26,25 +26,25 @@ O decodificador e o `enable` escolhem qual registrador grava. O mux, controlado 
 ```
 📁 ram-16x8
 ├── 📁 src
-│   ├── 📄 mem_pkg.vhd          # tipo mem_t (array 0 to 15 de 8 bits)
-│   ├── 📄 decoder4x16.vhd      # decodificador 4→16 (combinacional)
-│   ├── 📄 reg8.vhd             # registrador de 8 bits (FF D, clear assíncrono, load)
-│   ├── 📄 mux16x1.vhd          # multiplexador 16:1 (combinacional)
-│   └── 📄 ram16x8.vhd          # top-level estrutural
+│   ├── 📝 mem_pkg.vhd          # tipo mem_t (array 0 to 15 de 8 bits)
+│   ├── 📝 decoder4x16.vhd      # decodificador 4→16 (combinacional)
+│   ├── 📝 reg8.vhd             # registrador de 8 bits (FF D, clear assíncrono, load)
+│   ├── 📝 mux16x1.vhd          # multiplexador 16:1 (combinacional)
+│   └── 📝 ram16x8.vhd          # top-level estrutural
 │
 ├── 📁 tb
-│   └── 📄 tb_ram.vhd           # testbench autoverificável (T1–T6)
+│   └── 📝 tb_ram.vhd           # testbench autoverificável (T1–T6)
 │
 ├── 📁 constraints
-│   └── 📄 boolean_board.xdc    # template de pinos (Vivado)
+│   └── 📝 boolean_board.xdc    # template de pinos (Vivado)
 │
 ├── 📁 docs
 │   ├── 🖼️ arquitetura.png      # arquitetura implementada
 │   └── 🖼️ diagrama-blocos.png  # diagrama de blocos detalhado
 │
-├── 📄 Dockerfile               # ambiente com GHDL
-├── 📄 sim.sh                   # simulação com GHDL
-└── 📄 Makefile                 # simulação via make
+├── 📝 Dockerfile               # ambiente com GHDL
+├── 📝 sim.sh                   # simulação com GHDL
+└── 📝 Makefile                 # simulação via make
 ```
 
 Ordem de compilação: `mem_pkg` → `decoder4x16` → `reg8` → `mux16x1` → `ram16x8` → `tb_ram`.
