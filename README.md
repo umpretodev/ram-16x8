@@ -2,7 +2,7 @@
 
 Memória RAM de 16 posições × 8 bits (128 bits) com **escrita síncrona** (borda de subida do clock manual) e **leitura assíncrona**, com `enable` e `clear`. Descrita em VHDL sintetizável, simulada no GHDL e prototipada em FPGA (Boolean Board).
 
-## Interface do top-level (`ram16x8`)
+## 🔌 Interface do top-level (`ram16x8`)
 
 | Porta    | Direção | Largura | Função                        |
 |----------|---------|---------|-------------------------------|
@@ -13,7 +13,7 @@ Memória RAM de 16 posições × 8 bits (128 bits) com **escrita síncrona** (bo
 | `din`    | entrada | 8 bits  | Dado a escrever               |
 | `dout`   | saída   | 8 bits  | Dado lido (LEDs)              |
 
-## Arquitetura
+## 🧩 Arquitetura
 
 ![Arquitetura implementada, com os 3 blocos obrigatórios](docs/arquitetura.png)
 
@@ -49,7 +49,7 @@ O decodificador e o `enable` escolhem qual registrador grava. O mux, controlado 
 
 Ordem de compilação: `mem_pkg` → `decoder4x16` → `reg8` → `mux16x1` → `ram16x8` → `tb_ram`.
 
-## Requisitos
+## 📋 Requisitos
 
 | ID | Requisito |
 |----|-----------|
@@ -65,7 +65,7 @@ Ordem de compilação: `mem_pkg` → `decoder4x16` → `reg8` → `mux16x1` → 
 | REQ-10 | Descrição sintetizável |
 | REQ-11 | Projeto contém FF D, decodificador 1:16 e multiplexador 16:1 |
 
-## Decisões de projeto
+## 🧠 Decisões de projeto
 
 | ID | Decisão | Justificativa |
 |----|---------|---------------|
@@ -77,7 +77,7 @@ Ordem de compilação: `mem_pkg` → `decoder4x16` → `reg8` → `mux16x1` → 
 
 > **Bounce:** um botão mecânico pode gerar várias bordas por aperto. Na escrita isso não causa erro (o mesmo dado é gravado várias vezes). Debounce é opcional.
 
-## Simulação
+## ▶️ Simulação
 
 Requer [GHDL](https://github.com/ghdl/ghdl) (e opcionalmente GTKWave).
 
@@ -88,7 +88,7 @@ sudo apt install ghdl gtkwave
 ./sim.sh 08 --wave  # abre a forma de onda no GTKWave
 ```
 
-### Via Docker (sem instalar o GHDL)
+### 🐳 Via Docker (sem instalar o GHDL)
 
 ```bash
 docker build -t ghdl-ram .
@@ -98,7 +98,7 @@ gtkwave onda.ghw   # no host
 
 Também funciona via `make sim` / `make wave` (`STD=93` para VHDL-93). A simulação termina sozinha em 1025 ns. Saída esperada: `RESULTADO: todos os testes passaram`.
 
-### Plano de verificação
+### ✅ Plano de verificação
 
 | ID | Teste | Procedimento | Critério |
 |----|-------|--------------|----------|
@@ -111,7 +111,7 @@ Também funciona via `make sim` / `make wave` (`STD=93` para VHDL-93). A simula�
 
 Resultado (GHDL via Docker): 6 de 6 testes aprovados em VHDL-93 e VHDL-2008. **Teste negativo (documentado no projeto):** com o `reg8` alterado para ignorar `load`, o testbench reporta 35 falhas (T2, T3, T4 e T5), provando que detecta erros.
 
-### Matriz de rastreabilidade
+### 🔗 Matriz de rastreabilidade
 
 | Requisito | Método | Simulação | FPGA |
 |-----------|--------|-----------|------|
@@ -127,7 +127,7 @@ Resultado (GHDL via Docker): 6 de 6 testes aprovados em VHDL-93 e VHDL-2008. **T
 | REQ-10 | Inspeção | n/a | Build sem erros |
 | REQ-11 | Inspeção | Código | n/a |
 
-## Teste na FPGA (Boolean Board)
+## 🔬 Teste na FPGA (Boolean Board)
 
 A Boolean Board tem 16 switches, então as 15 entradas cabem sem fios extras.
 
@@ -151,7 +151,7 @@ Roteiro de laboratório (filmar cada teste como evidência):
 - **F5 Clear:** ligar e desligar `clear`; 0, 5 e 15 leem `00000000`.
 - **F6 Retenção:** repetir F1, apertar BTN0 várias vezes com `enable = 0` e reler os três endereços.
 
-## Riscos
+## ⚠️ Riscos
 
 | ID | Risco | Mitigação |
 |----|-------|-----------|
@@ -161,7 +161,7 @@ Roteiro de laboratório (filmar cada teste como evidência):
 | R-04 | Demonstração falha na apresentação | Vídeos dos testes F1–F6 nos slides |
 | R-05 | Professor não aceitar o GHDL | Código idêntico em qualquer simulador |
 
-## Notas de projeto
+## 💡 Notas de projeto
 
 - **Por que não block RAM?** A leitura assíncrona (REQ-05) e o clear de todas as posições ao mesmo tempo (REQ-06) não cabem no modelo de block RAM. A memória vira 128 flip-flops (16 × `reg8`).
 - **Sem latch inferido:** o decodificador atribui `sel <= (others => '0')` antes de ligar a saída escolhida.
