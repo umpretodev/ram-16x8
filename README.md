@@ -33,7 +33,7 @@ O decodificador e o `enable` escolhem qual registrador grava. O mux, controlado 
 │   └── 📝 ram16x8.vhd          # top-level estrutural
 │
 ├── 📁 tb
-│   └── 📝 tb_ram.vhd           # testbench autoverificável (T1–T6)
+│   └── 📝 tb_ram.vhd           # testbench autoverificável (TEST-01 a TEST-06)
 │
 ├── 📁 constraints
 │   └── 📝 boolean_board.xdc    # template de pinos (Vivado)
@@ -103,26 +103,26 @@ Também funciona via `make sim` / `make wave` (`STD=93` para VHDL-93). A simula�
 
 | ID | Teste | Procedimento | Critério |
 |----|-------|--------------|----------|
-| T1 | Escrita | `enable = 1`, grava valor distinto nos 16 endereços | Sem erro |
-| T2 | Leitura | Lê os 16 endereços | `dout` igual ao gravado |
-| T3 | Leitura assíncrona | Troca `addr` (3, 12, 0) sem clock | `dout` muda em até 5 ns |
-| T4 | Enable | `enable = 0`, `din = 00`, um pulso no endereço 5 | Endereço 5 mantém o valor |
-| T5 | Retenção | 16 pulsos com `enable = 0` e `din = FF` | Todos mantêm os valores |
-| T6 | Clear | Pulso em `clear`, sem clock | Todos leem `00` |
+| TEST-01 | Escrita | `enable = 1`, grava valor distinto nos 16 endereços | Sem erro |
+| TEST-02 | Leitura | Lê os 16 endereços | `dout` igual ao gravado |
+| TEST-03 | Leitura assíncrona | Troca `addr` (3, 12, 0) sem clock | `dout` muda em até 5 ns |
+| TEST-04 | Enable | `enable = 0`, `din = 00`, um pulso no endereço 5 | Endereço 5 mantém o valor |
+| TEST-05 | Retenção | 16 pulsos com `enable = 0` e `din = FF` | Todos mantêm os valores |
+| TEST-06 | Clear | Pulso em `clear`, sem clock | Todos leem `00` |
 
-Resultado (GHDL via Docker): 6 de 6 testes aprovados em VHDL-93 e VHDL-2008. **Teste negativo (documentado no projeto):** com o `reg8` alterado para ignorar `load`, o testbench reporta 35 falhas (T2, T3, T4 e T5), provando que detecta erros.
+Resultado (GHDL via Docker): 6 de 6 testes aprovados em VHDL-93 e VHDL-2008. **Teste negativo (documentado no projeto):** com o `reg8` alterado para ignorar `load`, o testbench reporta 35 falhas (TEST-02, TEST-03, TEST-04 e TEST-05), provando que detecta erros.
 
 ### 🔗 Matriz de rastreabilidade
 
 | Requisito | Método | Simulação | FPGA |
 |-----------|--------|-----------|------|
-| REQ-01 | Teste | T1, T2 | F1, F2 |
-| REQ-02 | Teste | T2 | F2 |
-| REQ-03 | Teste | T1, T2 | F1 |
-| REQ-04 | Teste | T4 | F4 |
-| REQ-05 | Teste | T3 | F3 |
-| REQ-06 | Teste | T6 | F5 |
-| REQ-07 | Teste | T5 | F6 |
+| REQ-01 | Teste | TEST-01, TEST-02 | F1, F2 |
+| REQ-02 | Teste | TEST-02 | F2 |
+| REQ-03 | Teste | TEST-01, TEST-02 | F1 |
+| REQ-04 | Teste | TEST-04 | F4 |
+| REQ-05 | Teste | TEST-03 | F3 |
+| REQ-06 | Teste | TEST-06 | F5 |
+| REQ-07 | Teste | TEST-05 | F6 |
 | REQ-08 | Teste | n/a | F1 |
 | REQ-09 | Inspeção | n/a | F2 |
 | REQ-10 | Inspeção | n/a | Build sem erros |
