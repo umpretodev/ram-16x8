@@ -116,15 +116,15 @@ Resultado (GHDL via Docker): 6 de 6 testes aprovados em VHDL-93 e VHDL-2008. **T
 
 | Requisito | Método | Simulação | FPGA |
 |-----------|--------|-----------|------|
-| REQ-01 | Teste | TEST-01, TEST-02 | F1, F2 |
-| REQ-02 | Teste | TEST-02 | F2 |
-| REQ-03 | Teste | TEST-01, TEST-02 | F1 |
-| REQ-04 | Teste | TEST-04 | F4 |
-| REQ-05 | Teste | TEST-03 | F3 |
-| REQ-06 | Teste | TEST-06 | F5 |
-| REQ-07 | Teste | TEST-05 | F6 |
-| REQ-08 | Teste | n/a | F1 |
-| REQ-09 | Inspeção | n/a | F2 |
+| REQ-01 | Teste | TEST-01, TEST-02 | FPGA-01, FPGA-02 |
+| REQ-02 | Teste | TEST-02 | FPGA-02 |
+| REQ-03 | Teste | TEST-01, TEST-02 | FPGA-01 |
+| REQ-04 | Teste | TEST-04 | FPGA-04 |
+| REQ-05 | Teste | TEST-03 | FPGA-03 |
+| REQ-06 | Teste | TEST-06 | FPGA-05 |
+| REQ-07 | Teste | TEST-05 | FPGA-06 |
+| REQ-08 | Teste | n/a | FPGA-01 |
+| REQ-09 | Inspeção | n/a | FPGA-02 |
 | REQ-10 | Inspeção | n/a | Build sem erros |
 | REQ-11 | Inspeção | Código | n/a |
 
@@ -145,12 +145,12 @@ Preencha os pinos em [`constraints/boolean_board.xdc`](constraints/boolean_board
 
 Roteiro de laboratório (filmar cada teste como evidência):
 
-- **F1 Escrita:** `enable = 1`. Gravar `10101010` no endereço 0, `11110000` no 5 e `00001111` no 15, apertando BTN0 em cada um.
-- **F2 Leitura:** `enable = 0`. Selecionar 0, 5 e 15 e conferir os LEDs.
-- **F3 Leitura assíncrona:** trocar `addr` entre 0, 5 e 15 sem apertar BTN0; os LEDs mudam na hora.
-- **F4 Enable:** `enable = 0`, `din = 11111111`, endereço 5, apertar BTN0; LEDs continuam em `11110000`.
-- **F5 Clear:** ligar e desligar `clear`; 0, 5 e 15 leem `00000000`.
-- **F6 Retenção:** repetir F1, apertar BTN0 várias vezes com `enable = 0` e reler os três endereços.
+- **FPGA-01 Escrita:** `enable = 1`. Gravar `10101010` no endereço 0, `11110000` no 5 e `00001111` no 15, apertando BTN0 em cada um.
+- **FPGA-02 Leitura:** `enable = 0`. Selecionar 0, 5 e 15 e conferir os LEDs.
+- **FPGA-03 Leitura assíncrona:** trocar `addr` entre 0, 5 e 15 sem apertar BTN0; os LEDs mudam na hora.
+- **FPGA-04 Enable:** `enable = 0`, `din = 11111111`, endereço 5, apertar BTN0; LEDs continuam em `11110000`.
+- **FPGA-05 Clear:** ligar e desligar `clear`; 0, 5 e 15 leem `00000000`.
+- **FPGA-06 Retenção:** repetir FPGA-01, apertar BTN0 várias vezes com `enable = 0` e reler os três endereços.
 
 ## ⚠️ Riscos
 
@@ -159,7 +159,7 @@ Roteiro de laboratório (filmar cada teste como evidência):
 | R-01 | Build falha no lab e falta tempo | Chegar com tudo simulado e pinos prontos; sexta (23/10) como reserva |
 | R-02 | Vivado recusa o botão como clock | `CLOCK_DEDICATED_ROUTE FALSE` no `.xdc` |
 | R-03 | Bounce gera várias bordas | Sem impacto na escrita; debounce opcional |
-| R-04 | Demonstração falha na apresentação | Vídeos dos testes F1–F6 nos slides |
+| R-04 | Demonstração falha na apresentação | Vídeos dos testes FPGA-01 a FPGA-06 nos slides |
 | R-05 | Professor não aceitar o GHDL | Código idêntico em qualquer simulador |
 
 ## 💡 Notas de projeto
