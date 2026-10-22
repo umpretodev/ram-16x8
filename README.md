@@ -40,7 +40,8 @@ O decodificador e o `enable` escolhem qual registrador grava. O mux, controlado 
 │
 ├── 📁 docs
 │   ├── 🖼️ arquitetura.png      # arquitetura implementada
-│   └── 🖼️ diagrama-blocos.png  # diagrama de blocos detalhado
+│   ├── 🖼️ diagrama-blocos.png  # diagrama de blocos detalhado
+│   └── 🌐 artifact-ram16x8.html # artifact
 │
 ├── 📝 Dockerfile               # ambiente com GHDL
 ├── 📝 sim.sh                   # simulação com GHDL
