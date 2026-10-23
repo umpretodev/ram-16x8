@@ -36,7 +36,8 @@ O decodificador e o `enable` escolhem qual registrador grava. O mux, controlado 
 │   └── 📝 tb_ram.vhd           # testbench autoverificável (TEST-01 a TEST-06)
 │
 ├── 📁 constraints
-│   └── 📝 boolean_board.xdc    # template de pinos (Vivado)
+│   ├── 📝 boolean_board.xdc    # pinos da Boolean Board (Vivado)
+│   └── 📝 de0_nano.qsf         # pinos da DE0-Nano (Quartus), GPIO a completar
 │
 ├── 📁 docs
 │   ├── 🖼️ arquitetura.png      # arquitetura implementada

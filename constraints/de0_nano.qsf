@@ -1,0 +1,31 @@
+# Constraints para a DE0-Nano (Quartus) - Cyclone IV E EP4CE22F17C6.
+# ATENÇÃO: pinos escritos de memória, exceto o clock de 50 MHz (PIN_R8, visto no Pin Planner).
+# Confira TODOS com o manual da DE0-Nano antes de gravar.
+#
+# A DE0-Nano tem só 4 switches, 2 botões e 8 LEDs. O projeto precisa de 15 entradas,
+# então din, addr, enable e clear precisam de switches externos ligados ao GPIO.
+# Os pinos do GPIO ficam como TODO: pegue-os no manual.
+
+set_global_assignment -name DEVICE EP4CE22F17C6
+set_global_assignment -name TOP_LEVEL_ENTITY ram16x8
+
+# clk (clock manual) -> KEY0
+set_location_assignment PIN_J15 -to clk
+
+# dout[7:0] -> LED0..LED7
+set_location_assignment PIN_A15 -to dout[0]
+set_location_assignment PIN_A13 -to dout[1]
+set_location_assignment PIN_B13 -to dout[2]
+set_location_assignment PIN_A11 -to dout[3]
+set_location_assignment PIN_D1  -to dout[4]
+set_location_assignment PIN_F3  -to dout[5]
+set_location_assignment PIN_B1  -to dout[6]
+set_location_assignment PIN_L3  -to dout[7]
+
+# clear -> KEY1
+set_location_assignment PIN_E1 -to clear
+
+# TODO (GPIO com switches externos): preencher com os pinos do manual
+# set_location_assignment PIN_?? -to din[0]   ... din[7]
+# set_location_assignment PIN_?? -to addr[0]  ... addr[3]
+# set_location_assignment PIN_?? -to enable
